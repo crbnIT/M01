@@ -1,19 +1,20 @@
 # Corbyn Eaker
-# Lists_Functions_Classes.ipynb
+# Lists_Functions_Classes.py
 # This program takes user information and creates a car with it, then displays the car's information in an easy to read format
 
-# create the parent class Vehicle with type attribute
+# create the parent class Vehicle with type attribute, moved some attributes off of automobile and into vehicle to be inherited
 class Vehicle:
-    def __init__(self, type):
+    def __init__(self, type, year, make, model):
         self.type = type
-
-# create the child Automobile class which inherits from the Vehicle class
-class Automobile(Vehicle):
-    # give it all attributes I'll be asking for
-    def __init__(self, year, make, model, door, roof):
         self.year = year
         self.make = make
         self.model = model
+
+# create the child Automobile class which inherits from the Vehicle class
+class Automobile(Vehicle):
+    # give it all attributes I'll be asking for, added super() function so it inherits from parent
+    def __init__(self, type, year, make, model, door, roof):
+        super().__init__(type, year, make, model)
         self.door = door
         self.roof = roof
     # fuction to call in order to print the automobile's information
@@ -41,9 +42,9 @@ elif roof_type.lower() == "n":
 else:
     user_roof = "Unknown"
 
+# user_type is now a parameter just like all other attributes, not sure what i was doing there
 # creating the user's automobile, passing the collected inputs into the class parameters
-user_car = Automobile(user_year, user_make, user_model, user_door, user_roof)
-user_car.type = user_type
+user_car = Automobile(user_type, user_year, user_make, user_model, user_door, user_roof)
 
 # calling function to print automobile's information
 user_car.get_info()
