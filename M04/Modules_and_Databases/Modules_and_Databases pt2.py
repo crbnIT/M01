@@ -6,7 +6,7 @@
 import csv
 import sqlite3 as sq
 import sqlalchemy as sa
-
+from sqlalchemy import text
 
 # 16.3
 # Saving text to be stored in CSV file in variable
@@ -60,18 +60,21 @@ with open('book2.csv', 'r') as file:
     for row in rows:
         print(row)
 
-    # closing connection to the database
-    conn.close()
+# closing connection to the database
+conn.close()
 
 
 # 16.8 [NOT COMPLETE]
 # creating variable for engine
-conn2 = sa.create_engine('sqlite://', echo=None)
-# trying to call the execute method on the engine, this is where the error occurs
-rows2 = conn2.execute('SELECT * FROM books ORDER BY year')
-print(rows)
+engine = sa.create_engine('sqlite:///books.db', echo=None)
+conn2 = engine.connect()
+# using the connection object to execute the query
+query = 'SELECT * FROM books ORDER BY year'
+result = conn2.execute(text(query))
+rows2 = result.fetchall()
+# having a very hard time getting this to print
+for row in rows2:
+    print(row)
 
-
-
-
+conn2.close()
 
