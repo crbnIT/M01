@@ -64,17 +64,18 @@ with open('book2.csv', 'r') as file:
 conn.close()
 
 
-# 16.8 [NOT COMPLETE]
-# creating variable for engine
+# 16.8 [NOT COMPLETE] final print statement will not print anything
+# creating variable for engine and connection object
 engine = sa.create_engine('sqlite:///books.db', echo=None)
 conn2 = engine.connect()
-# using the connection object to execute the query
+# using the connection object to execute the query, had to import text and call it on the variable with the query stored inside
 query = 'SELECT * FROM books ORDER BY year'
 result = conn2.execute(text(query))
+# fetching all data returned from query and storing it in rows2 variable
 rows2 = result.fetchall()
-# having a very hard time getting this to print
+# this should print the stored query results, having a very hard time getting this to print
 for row in rows2:
     print(row)
-
+# closing connection to database
 conn2.close()
 
