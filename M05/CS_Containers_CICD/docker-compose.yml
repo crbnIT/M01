@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  sdev220:
+    image: sdev220
+    build:
+      context: .
+      dockerfile: ./Dockerfile
